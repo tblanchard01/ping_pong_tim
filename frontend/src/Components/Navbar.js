@@ -1,46 +1,44 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import Paddle from './Paddle';
+import React, { Component } from "react";
 
 class Navbar extends Component {
   render() {
     return (
-      <nav className="navbar">
-        <ul>
-          <li className="nav-paddle">
-            <Paddle scale={0.75} />
-          </li>
-          <li>
-            <NavLink
-              activeClassName="active-link"
-              exact
-              to="/"
-              className="menu-item"
-            >
-              Start
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              activeClassName="active-link"
-              to="/game"
-              className="menu-item"
-            >
-              Scoreboard
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              activeClassName="active-link"
-              to="/leaderboard"
-              className="menu-item"
-            >
-              Ranking
-            </NavLink>
-          </li>
-          <li />
-        </ul>
-      </nav>
+      <div>
+        <nav className="navbar navbar-inverse navbar-fixed-top">
+          <div className="collapse navbar-collapse" id="navbar-collapse">
+            <ul className="nav navbar-nav navbar-right">
+              <button type="button" className="paddle-button">
+                <img
+                  className="paddle-logo"
+                  src="https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537263060/image_pr1hqh.png"
+                  alt="app logo"
+                />
+              </button>
+              <div className="menu-items">
+                <li>
+                  <a className="menu-item">PLAY</a>
+                </li>
+                <li>
+                  <a className="menu-item">TOURNAMENTS</a>
+                </li>
+                <li>
+                  <a className="menu-item">LEADERBOARDS</a>
+                </li>
+                <li>
+                  <a className="menu-item">LOGOUT</a>
+                </li>
+              </div>
+              <button type="button" className="profile-button">
+                <img
+                  className="profile-pic"
+                  src="https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537268860/angela-profile-image_cyhzx7.jpg"
+                  alt="profile pic"
+                />
+              </button>
+            </ul>
+          </div>
+        </nav>
+      </div>
     );
   }
 }

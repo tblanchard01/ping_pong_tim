@@ -1,6 +1,6 @@
 {
-  "short_name": "paddlr",
-  "name": "paddlr",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,7 +10,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "orientation": "landscape",
-  "theme_color": "#8E2621",
-  "background_color": "#4D4D4D"
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
 }

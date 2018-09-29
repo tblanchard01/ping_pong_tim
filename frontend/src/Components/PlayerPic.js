@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class PlayerPic extends Component {
   render() {
-    const { src, alt } = this.props;
     return (
-      <figure className="player-thumb">
-        <img src={src} alt={alt} />
-      </figure>
+      <div>
+        <button className="player-button">
+          <img
+            className="player-pic"
+            src={this.props.pic}
+            alt="player one"
+          />
+        </button>
+      </div>
     );
   }
 }

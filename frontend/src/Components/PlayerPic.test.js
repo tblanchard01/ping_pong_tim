@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import PlayerPic from "../Components/PlayerPic";
+import PlayerPic from "./PlayerPic";
 
 describe("PlayerPic", () => {
   let playerPic = shallow(<PlayerPic />);
