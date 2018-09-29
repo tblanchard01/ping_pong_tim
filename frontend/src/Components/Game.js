@@ -16,7 +16,7 @@ class Game extends Component {
       toServe: 0,
       player1pic: 'https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537275284/EdT_jg1gfi.jpg',
       player2pic: 'https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537268860/angela-profile-image_cyhzx7.jpg',
-      player1Id: null,
+      player1Id: 234,
       player2Id: null 
 
     };
