@@ -66,7 +66,7 @@ class Game extends Component {
       return (
         <div>
           <div className="left">
-            <Player toServe={toServe} playerid = {player1Id} pic =  {player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
+            <Player toServe={toServe} playerId = {player1Id} pic =  {player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
             {toServe === PLAYER_1 ? <Paddle direction="paddle-pic-left" /> : null}
           </div>
           <div className="right">
