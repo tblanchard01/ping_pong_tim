@@ -8,13 +8,11 @@ class Player extends Component {
       <div>
         <Points points={this.props.points} />
         <div>
-          <button
-            onClick={() => this.props.onScoreIncremented()}
-            className="score_button">
-            {this.props.toServe === 0 ? 'To Serve?' : 'Score'}
+          <button onClick={() => this.props.onScoreIncremented()} className="score_button">
+            {this.props.toServe === 0 ? "To Serve?" : "Score"}
           </button>
         </div>
-        <PlayerPic pic ={this.props.pic} />
+        <PlayerPic pic={this.props.pic} />
       </div>
     );
   }

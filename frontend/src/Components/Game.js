@@ -15,7 +15,10 @@ class Game extends Component {
       winner: null,
       toServe: 0,
       player1pic: 'https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537275284/EdT_jg1gfi.jpg',
-      player2pic: 'https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537268860/angela-profile-image_cyhzx7.jpg'
+      player2pic: 'https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537268860/angela-profile-image_cyhzx7.jpg',
+      player1Id: null,
+      player2Id: null 
+
     };
   }
 
@@ -39,7 +42,6 @@ class Game extends Component {
   }
 
   scoreButtonClick(player) {
-    //handles all the click methods
     if (this.state.toServe === 0) {
     this.setState({toServe: player })
     
@@ -58,17 +60,17 @@ class Game extends Component {
     }
   }
   render() {
-    const { player1Points, player2Points, toServe, player1pic, player2pic } = this.state;
+    const { player1Points, player2Points, toServe, player1pic, player2pic, player1Id, player2Id } = this.state;
 
     if (!this.state.winner) {
       return (
         <div>
           <div className="left">
-            <Player toServe={toServe} pic =  {player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
+            <Player toServe={toServe} playerid = {player1Id} pic =  {player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
             {toServe === PLAYER_1 ? <Paddle direction="paddle-pic-left" /> : null}
           </div>
           <div className="right">
-            <Player toServe={toServe} pic = {player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
+            <Player toServe={toServe} playerid = {player2Id} pic = {player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
 
             {toServe === PLAYER_2 ? <Paddle direction="paddle-pic-right" /> : null}
           </div>
