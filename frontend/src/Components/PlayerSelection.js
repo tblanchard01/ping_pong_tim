@@ -5,23 +5,13 @@ class PlayerSelection extends Component {
     return (
       <div className="player_selection">
         Select player:
-        <form>
-          <fieldset>
-            <select id="myList">
-              <option disabled selected value>
-                {" "}
-                -- Please select a player --{" "}
-              </option>
-
-
-{/* var result = arr.map(person => ({ value: person.id, text: person.name }));
-console.log(result) */}
-
-              {this.props.users.map(user => ( ( <option value="1">{user.name}</option>))) }
-
-            </select>
-          </fieldset>
-        </form>
+        <select onChange={(e) => console.log(e.target.value)}>
+          {this.props.users.map(user => (
+            <option key={user.id} value={user.name}>
+              {user.name}
+            </option>
+          ))}
+        </select>
       </div>
     );
   }

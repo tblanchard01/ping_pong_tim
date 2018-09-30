@@ -23,6 +23,11 @@ class Game extends Component {
     };
   }
 
+  // setPlayer(player, user){
+  //   player === 1 ?  :
+
+  // }
+
   findWinner(p1 = this.state.player1Points, p2 = this.state.player2Points) {
     if (p1 >= 21 && p2 <= p1 - 2) {
       this.setState({ winner: 1 });
