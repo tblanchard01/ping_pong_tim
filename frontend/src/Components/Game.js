@@ -16,25 +16,20 @@ class Game extends Component {
       toServe: 0,
       player1pic: "https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537275284/EdT_jg1gfi.jpg",
       player2pic: "https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537268860/angela-profile-image_cyhzx7.jpg",
-      player1Id: 234,
+      player1Id: null,
       player2Id: null,
       users: []
     };
   }
 
   setPlayer(player, id) {
+    const userobj = this.state.users.find(x => x._id === id);
 
-  const userobj = this.state.users.find((x) => x._id === id)  
-
-
-    if(player === 1){
-      this.setState({player1pic: userobj.slack_image, player1Id: id})
-
-    } else { 
-      this.setState({player2pic: userobj.slack_image, player2Id: id})} 
-
-
-
+    if (player === 1) {
+      this.setState({ player1pic: userobj.slack_image, player1Id: id });
+    } else {
+      this.setState({ player2pic: userobj.slack_image, player2Id: id });
+    }
   }
 
   findWinner(p1 = this.state.player1Points, p2 = this.state.player2Points) {
@@ -91,11 +86,15 @@ class Game extends Component {
       return (
         <div>
           <div className="left">
-            <Player users={users} updatePlayer = {(id) => this.setPlayer(1, id)} toServe={toServe} playerId={player1Id} pic={player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
+            <Player users={users} updatePlayer={id => this.setPlayer(1, id)} toServe={toServe} 
+            playerId={player1Id} 
+            pic={player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
             {toServe === PLAYER_1 ? <Paddle direction="paddle-pic-left" /> : null}
           </div>
           <div className="right">
-            <Player users={users} toServe={toServe} playerid={player2Id} pic={player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
+          <Player users={users} updatePlayer={id => this.setPlayer(2, id)} toServe={toServe} 
+            playerId={player2Id} 
+            pic={player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
 
             {toServe === PLAYER_2 ? <Paddle direction="paddle-pic-right" /> : null}
           </div>
