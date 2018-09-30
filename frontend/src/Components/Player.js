@@ -13,7 +13,7 @@ class Player extends Component {
       <div>
         <Points points={this.props.points} />
         <div> 
-        {this.props.playerId ? showScoreButton : <PlayerSelection users = {this.props.users}/> }
+        {this.props.playerId ? showScoreButton : <PlayerSelection users = {this.props.users} updatePlayer = {this.props.updatePlayer(id)} />   }
 
           
         </div>

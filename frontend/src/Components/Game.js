@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import Player from './Player';
-import Paddle from './Paddle';
-import PlayerPic from './PlayerPic'
-import fetch from 'node-fetch';
+import React, { Component } from "react";
+import Player from "./Player";
+import Paddle from "./Paddle";
+import PlayerPic from "./PlayerPic";
+import fetch from "node-fetch";
 const PLAYER_1 = 1;
 const PLAYER_2 = 2;
 
@@ -14,19 +14,28 @@ class Game extends Component {
       player2Points: 0,
       winner: null,
       toServe: 0,
-      player1pic: 'https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537275284/EdT_jg1gfi.jpg',
-      player2pic: 'https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537268860/angela-profile-image_cyhzx7.jpg',
+      player1pic: "https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537275284/EdT_jg1gfi.jpg",
+      player2pic: "https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537268860/angela-profile-image_cyhzx7.jpg",
       player1Id: 234,
       player2Id: null,
       users: []
-
     };
   }
 
-  // setPlayer(player, user){
-  //   player === 1 ?  :
+  setPlayer(player, id) {
 
-  // }
+  const userobj = this.state.users.find((x) => x._id === id)  
+
+
+    if(player === 1){
+      this.setState({player1pic: userobj.slack_image, player1Id: id})
+
+    } else { 
+      this.setState({player2pic: userobj.slack_image, player2Id: id})} 
+
+
+
+  }
 
   findWinner(p1 = this.state.player1Points, p2 = this.state.player2Points) {
     if (p1 >= 21 && p2 <= p1 - 2) {
@@ -51,16 +60,16 @@ class Game extends Component {
     if (this.state.toServe === 0) {
       this.setState({ toServe: player });
     } else if (player === PLAYER_1) {
-        this.setState({ player1Points: this.state.player1Points + 1 }, () => {
-          this.findNextServe();
-          this.findWinner();
-        });
-      } else {
-        this.setState({ player2Points: this.state.player2Points + 1 }, () => {
-          this.findNextServe();
-          this.findWinner();
-        });
-      }
+      this.setState({ player1Points: this.state.player1Points + 1 }, () => {
+        this.findNextServe();
+        this.findWinner();
+      });
+    } else {
+      this.setState({ player2Points: this.state.player2Points + 1 }, () => {
+        this.findNextServe();
+        this.findWinner();
+      });
+    }
   }
 
   componentDidMount() {
@@ -74,40 +83,42 @@ class Game extends Component {
       });
   }
 
-  
-
   render() {
-console.log(this.state + "current state ") 
+    console.log(this.state + "current state ");
     const { player1Points, player2Points, toServe, player1pic, player2pic, player1Id, player2Id, users } = this.state;
 
     if (!this.state.winner) {
       return (
         <div>
           <div className="left">
-            <Player users = {users} toServe={toServe} playerId = {player1Id} pic =  {player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
+            <Player users={users} updatePlayer = {(id) => this.setPlayer(1, id)} toServe={toServe} playerId={player1Id} pic={player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
             {toServe === PLAYER_1 ? <Paddle direction="paddle-pic-left" /> : null}
           </div>
           <div className="right">
-            <Player users = {users} toServe={toServe} playerid = {player2Id} pic = {player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
+            <Player users={users} toServe={toServe} playerid={player2Id} pic={player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
 
             {toServe === PLAYER_2 ? <Paddle direction="paddle-pic-right" /> : null}
           </div>
           <button onClick={() => console.log(this.state)}>show me state</button>
         </div>
       );
-    } return (
-     
-    <div>  
+    }
+    return (
+      <div>
+        <h1 className="winner_header"> The winner is player {this.state.winner}! </h1>
+        <img src={this.state.winner === 1 ? player1pic : player2pic} className="winner_pic" />
+        <button
+          className="play_again_button"
+          onClick={() => {
+            this.setState({ winner: null, player1Points: 0, player2Points: 0, winner: null, toServe: 0 });
+          }}
+        >
+          Play Again?
+        </button>
 
-    <h1 className = "winner_header"> The winner is player {this.state.winner}! </h1>
-    <img src = {this.state.winner === 1 ? player1pic : player2pic} className = "winner_pic"  />
-    <button className = "play_again_button" onClick = {() => {this.setState({winner: null,  player1Points: 0, player2Points: 0,winner: null, toServe: 0 })}}>Play Again?</button>
- 
-    
-    
-    {console.log(this.state)}
-    </div>
-    )
+        {console.log(this.state)}
+      </div>
+    );
   }
 }
 
