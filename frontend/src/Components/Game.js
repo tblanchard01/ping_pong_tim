@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import Player from "./Player";
-import Paddle from "./Paddle";
-import PlayerPic from "./PlayerPic"
+import React, { Component } from 'react';
+import Player from './Player';
+import Paddle from './Paddle';
+import PlayerPic from './PlayerPic'
+import fetch from 'node-fetch';
 const PLAYER_1 = 1;
 const PLAYER_2 = 2;
 
 class Game extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,8 @@ class Game extends Component {
       player1pic: 'https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537275284/EdT_jg1gfi.jpg',
       player2pic: 'https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537268860/angela-profile-image_cyhzx7.jpg',
       player1Id: 234,
-      player2Id: null 
+      player2Id: null,
+      users: []
 
     };
   }
@@ -43,10 +44,8 @@ class Game extends Component {
 
   scoreButtonClick(player) {
     if (this.state.toServe === 0) {
-    this.setState({toServe: player })
-    
-    } else {
-      if (player === PLAYER_1) {
+      this.setState({ toServe: player });
+    } else if (player === PLAYER_1) {
         this.setState({ player1Points: this.state.player1Points + 1 }, () => {
           this.findNextServe();
           this.findWinner();
@@ -57,8 +56,19 @@ class Game extends Component {
           this.findWinner();
         });
       }
-    }
   }
+
+  componentDidMount() {
+    const url = "https://paddlr.herokuapp.com/api/users";
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          users: data
+        });
+      });
+  }
+
   render() {
     const { player1Points, player2Points, toServe, player1pic, player2pic, player1Id, player2Id } = this.state;
 
@@ -77,7 +87,7 @@ class Game extends Component {
           <button onClick={() => console.log(this.state)}>show me state</button>
         </div>
       );
-    } else return (
+    } return (
      
     <div>  
 

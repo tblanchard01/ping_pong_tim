@@ -6,9 +6,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'game' 
+      view: 'game'
     };
   }
+
+
+
+
   render() {
     if(this.state.view == 'game'){   //if the state is game it returns our game component 
     return (   //buttons in the navbar component should  update the state of app. rather than it just being a huge button at the bottom :) 
