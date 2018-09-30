@@ -69,18 +69,21 @@ class Game extends Component {
       });
   }
 
+  
+
   render() {
-    const { player1Points, player2Points, toServe, player1pic, player2pic, player1Id, player2Id } = this.state;
+console.log(this.state + "current state ") 
+    const { player1Points, player2Points, toServe, player1pic, player2pic, player1Id, player2Id, users } = this.state;
 
     if (!this.state.winner) {
       return (
         <div>
           <div className="left">
-            <Player toServe={toServe} playerId = {player1Id} pic =  {player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
+            <Player users = {users} toServe={toServe} playerId = {player1Id} pic =  {player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
             {toServe === PLAYER_1 ? <Paddle direction="paddle-pic-left" /> : null}
           </div>
           <div className="right">
-            <Player toServe={toServe} playerid = {player2Id} pic = {player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
+            <Player users = {users} toServe={toServe} playerid = {player2Id} pic = {player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
 
             {toServe === PLAYER_2 ? <Paddle direction="paddle-pic-right" /> : null}
           </div>
