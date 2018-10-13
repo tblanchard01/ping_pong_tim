@@ -11,7 +11,7 @@ class Player extends Component {
 
     return (
       <div>
-        <Points points={this.props.points} />
+        <Points number = {this.props.number} points={this.props.points}  />
         <div> 
         {this.props.playerId ? showScoreButton : <PlayerSelection users = {this.props.users}
          updatePlayer = {this.props.updatePlayer} />   }
