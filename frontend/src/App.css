@@ -146,7 +146,7 @@ ul,
 
 .player-pic {
   border-radius: 50%;
-  width: 80%;
+  width: 20em;
 }
 
 .score_button {
@@ -187,8 +187,8 @@ ul,
 
 .paddle-pic-right {
   position: absolute;
-  top: 99%;
-  left: 20%;
+  top: 50%;
+  left: 80%;
   width: 20%; 
 
 
@@ -196,8 +196,8 @@ ul,
 
 .paddle-pic-left {
   position: absolute;
-    top: 99%;
-    right: 50%;
+    top: 50%;
+    right: 80%;
     -webkit-transform: scaleX(-1);
     -ms-transform: scaleX(-1);
     transform: scaleX(-1);
