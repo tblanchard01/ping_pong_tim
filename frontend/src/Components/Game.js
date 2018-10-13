@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Player from "./Player";
 import Paddle from "./Paddle";
-import PlayerPic from "./PlayerPic";
 import fetch from "node-fetch";
 const PLAYER_1 = 1;
 const PLAYER_2 = 2;
@@ -32,12 +31,61 @@ class Game extends Component {
     }
   }
 
+  postWinner(p1id, p1score, p2id, p2score){
+
+
+    
+
+    fetch("https://paddlr.herokuapp.com/api/games", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+       players: [
+         {
+           player_id:p1id, 
+           player_score: p1score
+          },
+          {
+            player_id:p2id, 
+            player_score: p2score
+          },
+        ],
+      }),
+    })
+
+    .then(res => res.json())
+    .then(json => console.log(json));
+
+//     curl "https://paddlr.herokuapp.com/api/games" \
+//   -X POST \
+//   -H "Content-Type: application/json" \
+//   -d '{
+//     "game_type": "leaderboard",
+//     "players": [
+//         {
+// 	        "player_id": "5ba237ce0a8e09198d51f1d4",
+// 	        "player_score": 12
+//         },
+//         {
+//             "player_id": "5ba237ce0a8e09198d51f1d3",
+//             "player_score": 21
+//         }
+//     ],
+// }'
+
+  }
+
   findWinner(p1 = this.state.player1Points, p2 = this.state.player2Points) {
     if (p1 >= 21 && p2 <= p1 - 2) {
       this.setState({ winner: 1 });
+      this.postWinner(this.state.player1Id, this.state.player1Points, this.state.player2Id, this.state.player2Id)
     }
     if (p2 >= 21 && p1 <= p2 - 2) {
       this.setState({ winner: 2 });
+      this.postWinner(this.state.player1Id, this.state.player1Points, this.state.player2Id, this.state.player2Id)
+
     }
   }
 
