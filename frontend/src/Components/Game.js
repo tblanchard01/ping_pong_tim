@@ -17,7 +17,7 @@ class Game extends Component {
       player2pic: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Default_profile_picture_%28male%29_on_Facebook.jpg/600px-Default_profile_picture_%28male%29_on_Facebook.jpg",
       player1Id: null,
       player2Id: null,
-      users: []
+      users: [],
     };
   }
 
@@ -31,58 +31,37 @@ class Game extends Component {
     }
   }
 
-  postWinner(p1id, p1score, p2id, p2score){
-
-   fetch("https://paddlr.herokuapp.com/api/games", {
+  postWinner(p1id, p1score, p2id, p2score) {
+    fetch("https://paddlr.herokuapp.com/api/games", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-       players: [
-         {
-           player_id:p1id, 
-           player_score: p1score
+        players: [
+          {
+            player_id: p1id,
+            player_score: p1score
           },
           {
-            player_id:p2id, 
+            player_id: p2id,
             player_score: p2score
-          },
-        ],
-      }),
+          }
+        ]
+      })
     })
-
-    .then(res => res.json())
-    .then(json => console.log(json));
-
-//     curl "https://paddlr.herokuapp.com/api/games" \
-//   -X POST \
-//   -H "Content-Type: application/json" \
-//   -d '{
-//     "game_type": "leaderboard",
-//     "players": [
-//         {
-// 	        "player_id": "5ba237ce0a8e09198d51f1d4",
-// 	        "player_score": 12
-//         },
-//         {
-//             "player_id": "5ba237ce0a8e09198d51f1d3",
-//             "player_score": 21
-//         }
-//     ],
-// }'
-
+      .then(res => res.json())
+      .then(json => console.log(json));
   }
 
   findWinner(p1 = this.state.player1Points, p2 = this.state.player2Points) {
     if (p1 >= 21 && p2 <= p1 - 2) {
       this.setState({ winner: 1 });
-      this.postWinner(this.state.player1Id, this.state.player1Points, this.state.player2Id, this.state.player2Id)
+      this.postWinner(this.state.player1Id, this.state.player1Points, this.state.player2Id, this.state.player2Id);
     }
     if (p2 >= 21 && p1 <= p2 - 2) {
       this.setState({ winner: 2 });
-      this.postWinner(this.state.player1Id, this.state.player1Points, this.state.player2Id, this.state.player2Id)
-
+      this.postWinner(this.state.player1Id, this.state.player1Points, this.state.player2Id, this.state.player2Id);
     }
   }
 
@@ -126,44 +105,40 @@ class Game extends Component {
   render() {
     console.log(this.state + "current state ");
     const { player1Points, player2Points, toServe, player1pic, player2pic, player1Id, player2Id, users } = this.state;
+      if (!this.state.winner) {
+        return (
+          <div>
+            <div className="left">
+              <Player number={1} users={users.filter(x => x._id !== player2Id)} updatePlayer={id => this.setPlayer(1, id)} toServe={toServe} playerId={player1Id} pic={player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
+              {toServe === PLAYER_1 ? <Paddle direction="paddle-pic-left" /> : null}
+            </div>
+            <div className="right">
+              <Player number={2} users={users.filter(x => x._id !== player1Id)} updatePlayer={id => this.setPlayer(2, id)} toServe={toServe} playerId={player2Id} pic={player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
 
-    if (!this.state.winner) {
+              {toServe === PLAYER_2 ? <Paddle direction="paddle-pic-right" /> : null}
+            </div>
+            <button onClick={() => console.log(this.state)}>show me state</button>
+          </div>
+        );
+      }
       return (
         <div>
-          <div className="left">
-            <Player number ={1} users={users.filter(x => x._id !== player2Id)} updatePlayer={id => this.setPlayer(1, id)} toServe={toServe} 
-            playerId={player1Id} 
-            pic={player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
-            {toServe === PLAYER_1 ? <Paddle direction="paddle-pic-left" /> : null}
-          </div>
-          <div className="right">
-          <Player number={2} users={users.filter(x => x._id !== player1Id)} updatePlayer={id => this.setPlayer(2, id)} toServe={toServe} 
-            playerId={player2Id} 
-            pic={player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
+          <h1 className="winner_header"> The winner is player {this.state.winner}! </h1>
+          <img src={this.state.winner === 1 ? player1pic : player2pic} className="winner_pic" />
+          <button
+            className="play_again_button"
+            onClick={() => {
+              this.setState({ winner: null, player1Points: 0, player2Points: 0, winner: null, toServe: 0 });
+            }}
+          >
+            Play Again?
+          </button>
 
-            {toServe === PLAYER_2 ? <Paddle direction="paddle-pic-right" /> : null}
-          </div>
-          <button onClick={() => console.log(this.state)}>show me state</button>
+          {console.log(this.state)}
         </div>
       );
     }
-    return (
-      <div>
-        <h1 className="winner_header"> The winner is player {this.state.winner}! </h1>
-        <img src={this.state.winner === 1 ? player1pic : player2pic} className="winner_pic" />
-        <button
-          className="play_again_button"
-          onClick={() => {
-            this.setState({ winner: null, player1Points: 0, player2Points: 0, winner: null, toServe: 0 });
-          }}
-        >
-          Play Again?
-        </button>
-
-        {console.log(this.state)}
-      </div>
-    );
   }
-}
+
 
 export default Game;

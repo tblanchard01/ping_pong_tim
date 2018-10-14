@@ -69,14 +69,6 @@ ul,
   width: 10em;
 }
 
-.profile-button {
-  background-color: #cb4345;
-  border-color: #cb4345;
-  display: flex;
-  justify-content: flex-end;
-  padding: 1% 10% 1% 0;
-}
-
 .left {
   float: left;
   position: relative;

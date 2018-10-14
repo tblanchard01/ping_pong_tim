@@ -19,22 +19,10 @@ class Navbar extends Component {
                   <a className="menu-item">PLAY</a>
                 </li>
                 <li>
-                  <a className="menu-item">TOURNAMENTS</a>
-                </li>
-                <li>
                   <a className="menu-item">LEADERBOARDS</a>
                 </li>
-                <li>
-                  <a className="menu-item">LOGOUT</a>
-                </li>
               </div>
-              <button type="button" className="profile-button">
-                <img
-                  className="profile-pic"
-                  src="https://res.cloudinary.com/dani-devs-and-designs/image/upload/v1537268860/angela-profile-image_cyhzx7.jpg"
-                  alt="profile pic"
-                />
-              </button>
+        
             </ul>
           </div>
         </nav>
