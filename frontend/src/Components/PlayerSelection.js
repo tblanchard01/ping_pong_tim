@@ -8,10 +8,12 @@ class PlayerSelection extends Component {
         <select onChange={(e) => {
           this.props.updatePlayer(e.target.value)
         }}>
+        <option disabled = {false}>Select Player</option>
           {this.props.users.map(user => (
             <option key={user._id} value={user._id}>
               {user.name}
             </option>
+
           ))}
         </select>
       </div>

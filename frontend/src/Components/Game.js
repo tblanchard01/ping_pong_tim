@@ -33,10 +33,7 @@ class Game extends Component {
 
   postWinner(p1id, p1score, p2id, p2score){
 
-
-    
-
-    fetch("https://paddlr.herokuapp.com/api/games", {
+   fetch("https://paddlr.herokuapp.com/api/games", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
