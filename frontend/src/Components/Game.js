@@ -131,13 +131,13 @@ class Game extends Component {
       return (
         <div>
           <div className="left">
-            <Player number ={1} users={users} updatePlayer={id => this.setPlayer(1, id)} toServe={toServe} 
+            <Player number ={1} users={users.filter(x => x._id !== player2Id)} updatePlayer={id => this.setPlayer(1, id)} toServe={toServe} 
             playerId={player1Id} 
             pic={player1pic} points={player1Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_1)} />
             {toServe === PLAYER_1 ? <Paddle direction="paddle-pic-left" /> : null}
           </div>
           <div className="right">
-          <Player number={2} users={users} updatePlayer={id => this.setPlayer(2, id)} toServe={toServe} 
+          <Player number={2} users={users.filter(x => x._id !== player1Id)} updatePlayer={id => this.setPlayer(2, id)} toServe={toServe} 
             playerId={player2Id} 
             pic={player2pic} points={player2Points} onScoreIncremented={() => this.scoreButtonClick(PLAYER_2)} />
 
