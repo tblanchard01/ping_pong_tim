@@ -16,10 +16,10 @@ class Navbar extends Component {
               </button>
               <div className="menu-items">
                 <li>
-                  <a className="menu-item">PLAY</a>
+                  <a className="menu-item"  onClick = {()=> this.props.onChange("game") }>PLAY</a>
                 </li>
                 <li>
-                  <a className="menu-item">LEADERBOARDS</a>
+                  <a className="menu-item"  onClick = {()=> this.props.onChange("leaderboard") } >LEADERBOARDS</a>
                 </li>
               </div>
         

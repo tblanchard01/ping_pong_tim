@@ -11,27 +11,27 @@ class App extends Component {
       view: "game"
     };
   }
+
+  changeView(page) {
+    this.setState({ view: page });
+  }
+
   render() {
     if (this.state.view == "game") {
       // if the state is game it returns our game component
       return (
         <div>
-          <Navbar />
+          <Navbar onChange={page => this.changeView(page)} />
           <Game />
-
-          {/* <button onClick ={ () => {this.setState({view: 'leaderboard'})}} className = "score_button" >show me the leaderboard</button>   */}
         </div>
       );
     } else if (this.state.view == "leaderboard") {
       // table should be it's own component, but just as an example
       return (
         <div>
+          <Navbar onChange={page => this.changeView(page)} />
           <Leaderboard />
-          <button onClick={() => {this.setState({ view: "game" });
-            }}
-            className="score_button">
-            Play a game of ping pong
-          </button>
+    
         </div>
       );
     }

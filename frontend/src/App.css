@@ -32,6 +32,13 @@ body {
   padding: 0;
 }
 
+.menu-item{
+  cursor: pointer;  
+}
+
+.menu-item:hover {
+  text-decoration: underline
+}
 .menu-items {
   display: flex;
   flex-direction: row;
@@ -39,6 +46,7 @@ body {
   margin: 0 40%;
   /* padding: 3%; */
   width: 50%;
+  
 }
 
 li {
