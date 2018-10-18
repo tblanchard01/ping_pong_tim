@@ -21,6 +21,9 @@ class Navbar extends Component {
                 <li>
                   <a className="menu-item"  onClick = {()=> this.props.onChange("leaderboard") } >LEADERBOARDS</a>
                 </li>
+                <li>
+                  <a className="menu-item"  onClick = {()=> this.props.onChange("rules") } >RULES</a>
+                </li>
               </div>
         
             </ul>

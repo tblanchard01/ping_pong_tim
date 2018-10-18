@@ -3,6 +3,7 @@ import "../App.css";
 import Navbar from "./Navbar";
 import Game from "./Game";
 import Leaderboard from "./Leaderboard";
+import Rules from "./Rules"
 
 class App extends Component {
   constructor(props) {
@@ -17,24 +18,17 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.view == "game") {
-      // if the state is game it returns our game component
-      return (
-        <div>
-          <Navbar onChange={page => this.changeView(page)} />
-          <Game />
-        </div>
-      );
-    } else if (this.state.view == "leaderboard") {
-      // table should be it's own component, but just as an example
-      return (
-        <div>
-          <Navbar onChange={page => this.changeView(page)} />
-          <Leaderboard />
-    
-        </div>
-      );
-    }
+    const { view } = this.state;
+
+    return (
+      <div>
+        <Navbar onChange={page => this.changeView(page)} />
+        {view == "game" && <Game />}
+        {view == "leaderboard" && <Leaderboard />}
+        {view == "rules" && <Rules/>}
+        
+      </div>
+    );
   }
 }
 

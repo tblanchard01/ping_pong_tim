@@ -90,6 +90,10 @@ ul,
   width: 50%;
 }
 
+.rules-container{
+  padding: 2em; 
+}
+
 .games-won-left {
   font-family: "Play", sans-serif;
   font-size: 60px;
